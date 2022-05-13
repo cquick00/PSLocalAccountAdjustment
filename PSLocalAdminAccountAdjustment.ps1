@@ -23,16 +23,20 @@ foreach ($computer in $computers) {
                 if ($null -eq (Get-LocalUser -Name $account)) {
                     New-LocalUser -Name $account -PasswordNeverExpires $false -Password $password
                     Add-LocalGroupMember -Group $group -Member $account
+                    Write-Host "The account $account has been successfully created on this computer!"
                 }
                 elseif ($null -eq (Get-LocalGroupMember -Group $group -Member $account)) {
                     Add-LocalGroupMember -Group $group -Member $account
+                    Write-Host "The account $account has been successfully added to the $group group on this computer!"
                 }
                 else {
                     Set-LocalUser -Name $account -PasswordNeverExpires $false
+                    Write-Host "The account $account has successfully had it's PasswordNeverExpires flag set to false!"
                 }
                 if ($true -eq (Get-LocalUser -Name $disableAccount | ForEach-Object {$_.Enabled})) {
                     Set-LocalUser -Name $disableAccount -PasswordNeverExpires $false
                     Disable-LocalUser -Name $disableAccount
+                    Write-Host "The account $disableAccount has been successfully disabled on this computer!"
                 }
             }
             Remove-PSSession $session
