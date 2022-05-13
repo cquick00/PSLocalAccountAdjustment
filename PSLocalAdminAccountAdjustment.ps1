@@ -31,6 +31,7 @@ foreach ($computer in $computers) {
                     Set-LocalUser -Name $account -PasswordNeverExpires $false
                 }
                 if ($true -eq (Get-LocalUser -Name $disableAccount | ForEach-Object {$_.Enabled})) {
+                    Set-LocalUser -Name $disableAccount -PasswordNeverExpires $false
                     Disable-LocalUser -Name $disableAccount
                 }
             }
