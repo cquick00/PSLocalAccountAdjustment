@@ -21,7 +21,7 @@ foreach ($computer in $computers) {
                 $group = "Administrators"
                 $password = ConvertTo-SecureString "T3mp0r@ry123" -AsPlainText -Force ## This assumes you're using LAPS to manage the account you're creating, otherwise create a stronger password
                 if ($null -eq (Get-LocalUser -Name $account)) {
-                    New-LocalUser -Name $account -PasswordNeverExpires $false -Password $password
+                    New-LocalUser -Name $account -PasswordNeverExpires -Password $password
                     Add-LocalGroupMember -Group $group -Member $account
                     Write-Host "The account $account has been successfully created on this computer!"
                 }
