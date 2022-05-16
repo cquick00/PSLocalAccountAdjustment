@@ -19,7 +19,7 @@ foreach ($computer in $computers) {
                 $account = "YourAccountHere"
                 $disableAccount = "Administrator"
                 $group = "Administrators"
-                $password = "T3mp0r@ry123" ## This assumes you're using LAPS to manage the account you're creating, otherwise create a stronger password
+                $password = ConvertTo-SecureString "T3mp0r@ry123" -AsPlainText -Force ## This assumes you're using LAPS to manage the account you're creating, otherwise create a stronger password
                 if ($null -eq (Get-LocalUser -Name $account)) {
                     New-LocalUser -Name $account -PasswordNeverExpires $false -Password $password
                     Add-LocalGroupMember -Group $group -Member $account
