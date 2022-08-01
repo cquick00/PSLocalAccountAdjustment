@@ -1,5 +1,5 @@
 ### Initialize Global Variables
-$computers = Get-ADComputer -Filter * | ForEach-Object {$_.Name} | Sort-Object
+$computers = Get-ADComputer -Filter * | ForEach-Object { $_.Name } | Sort-Object
 $session = $null
 # $dc1 = "Your DC1 Name Here"
 # $dc2 = "Your DC2 Name Here"
@@ -41,7 +41,7 @@ foreach ($computer in $computers) {
                     Set-LocalUser -Name $account -PasswordNeverExpires $false
                     Write-Host "The account $account has successfully had it's PasswordNeverExpires flag set to false!"
                 }
-                if ($true -eq (Get-LocalUser -Name $disableAccount | ForEach-Object {$_.Enabled})) {
+                if ($true -eq (Get-LocalUser -Name $disableAccount | ForEach-Object { $_.Enabled })) {
                     Set-LocalUser -Name $disableAccount -PasswordNeverExpires $false
                     Disable-LocalUser -Name $disableAccount
                     Write-Host "The account $disableAccount has been successfully disabled on this computer!"
